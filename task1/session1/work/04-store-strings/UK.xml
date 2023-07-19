@@ -1,0 +1,49 @@
+<domain type='qemu'>
+    <name>store-strings_uk</name>
+    <!-- low memory = faster startup -->
+    <memory unit='KiB'>32000</memory>
+    <currentMemory unit='KiB'>32000</currentMemory>
+    <vcpu placement='static'>1</vcpu>
+    <os>
+        <type>hvm</type>
+        <!-- unikernel binary path -->
+        <kernel>/home/ubuntu/hw/UKraft/docs/content/en/community/hackathons/sessions/baby-steps/work/04-store-strings/build/04-store-strings_qemu-x86_64</kernel>
+        <!-- unikernel comand line to start and configure network -->
+        <cmdline>netdev.ipv4_addr=$VM_IP netdev.ipv4_gw_addr=$BRIDGE_IP netdev.ipv4_subnet_mask=255.255.255.0 --</cmdline>
+    </os>
+    <commandline xmlns="http://libvirt.org/schemas/domain/qemu/1.0">
+        <arg value="-fsdev"/>
+        <arg value="local,security_model=none,id=myid,path=/home/ubuntu/hw/UKraft/docs/content/en/community/hackathons/sessions/baby-steps/work/04-store-strings/fs0"/>
+        <arg value="-device"/>
+        <arg value="virtio-9p-pci,id=fs0,fsdev=myid,mount_tag=rootfs,disable-modern=on,disable-legacy=off"/>
+    </commandline>
+
+
+    <clock offset='utc' adjustment='reset'/>
+    <on_poweroff>destroy</on_poweroff>
+    <on_reboot>restart</on_reboot>
+    <on_crash>preserve</on_crash>
+    <devices>
+        <!-- The network interface connected to the bridge br0 -->
+        <interface type='bridge'>
+            <!-- <mac address='00:16:3e:6d:45:d0'/> -->
+            <source network='default' bridge='br0'/>
+            <target dev='unik0'/>
+            <model type='virtio'/>  <!-- this should be the driver included in unikernel baking -->
+            <alias name='net0'/>
+            <address type='pci' domain='0x0000' bus='0x00' slot='0x03' function='0x0'/>
+        </interface>
+         <!-- other serial and console interfaces -->
+        <serial type='pty'>
+            <source path='/dev/pts/20'/>
+            <target port='0'/>
+            <alias name='serial0'/>
+        </serial>
+        <console type='pty' tty='/dev/pts/20'>
+            <source path='/dev/pts/20'/>
+            <target type='serial' port='0'/>
+            <alias name='serial0'/>
+        </console>
+        <graphics port="-1" type="vnc" />
+    </devices>
+</domain>

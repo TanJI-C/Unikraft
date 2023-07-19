@@ -1,0 +1,1 @@
+gzip -f -9 -c /home/ubuntu/hw/UKraft/docs/content/en/community/hackathons/sessions/complex-applications/work/03-set-up-and-run-redis/build/app-redis_qemu-x86_64 >/home/ubuntu/hw/UKraft/docs/content/en/community/hackathons/sessions/complex-applications/work/03-set-up-and-run-redis/build/app-redis_qemu-x86_64.gz

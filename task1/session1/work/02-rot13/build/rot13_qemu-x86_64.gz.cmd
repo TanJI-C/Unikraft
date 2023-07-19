@@ -1,0 +1,1 @@
+gzip -f -9 -c /home/ubuntu/hw/UKraft/docs/content/en/community/hackathons/sessions/baby-steps/work/02-rot13/build/rot13_qemu-x86_64 >/home/ubuntu/hw/UKraft/docs/content/en/community/hackathons/sessions/baby-steps/work/02-rot13/build/rot13_qemu-x86_64.gz

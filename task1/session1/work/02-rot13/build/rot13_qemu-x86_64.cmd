@@ -1,0 +1,1 @@
+""strip -s --output-target elf32-i386 /home/ubuntu/hw/UKraft/docs/content/en/community/hackathons/sessions/baby-steps/work/02-rot13/build/rot13_qemu-x86_64.dbg -o /home/ubuntu/hw/UKraft/docs/content/en/community/hackathons/sessions/baby-steps/work/02-rot13/build/rot13_qemu-x86_64 2>&1 | { grep -v "Empty loadable segment detected" || true; }
