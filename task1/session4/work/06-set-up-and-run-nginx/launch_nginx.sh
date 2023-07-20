@@ -1,8 +1,6 @@
 sudo brctl addbr kraft0
 sudo ifconfig kraft0 172.44.0.1
 sudo ifconfig kraft0 up
-sudo ip l set dev kraft0 down
-sudo brctl delbr kraft0
 
 sudo dnsmasq -d \
              -log-queries \
@@ -25,4 +23,3 @@ sudo qemu-system-x86_64 -kernel build/app-nginx_qemu-x86_64 \
                    -append "" \
                    -m 100 \
                    -nographic
-                   -append "netdev.ipv4_addr=172.44.0.2 netdev.ipv4_gw_addr=172.44.0.1 netdev.ipv4_subnet_mask=255.255.255.0 --" \
